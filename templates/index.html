@@ -428,6 +428,210 @@
             transform: rotate(180deg);
         }
 
+        /* Botão Tela Cheia */
+        .fullscreen-btn {
+            position: absolute;
+            top: 20px;
+            right: 110px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50px;
+            padding: 12px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+            width: 44px;
+            height: 44px;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .fullscreen-btn i {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .fullscreen-btn:hover i {
+            transform: scale(1.1);
+        }
+
+        /* Modo Tela Cheia */
+        .fullscreen-mode {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background: var(--bg-color) !important;
+            z-index: 9999 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            max-width: 100vw !important;
+            backdrop-filter: none !important;
+            animation: expandToFullscreen 0.3s ease-out;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        body.fullscreen-active {
+            overflow: hidden !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .fullscreen-mode .chat-container {
+            flex: 1 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            max-width: none !important;
+            width: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            overflow: hidden !important;
+        }
+
+        .fullscreen-mode #chat-box {
+            flex: 1 !important;
+            font-size: 18px;
+            padding: 25px !important;
+            line-height: 1.6;
+            margin: 0 !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            overflow-y: auto !important;
+        }
+
+        .fullscreen-mode .header {
+            padding: 30px 40px !important;
+            border-bottom: 2px solid var(--border-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+            color: white !important;
+            width: 100% !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+        }
+
+        .fullscreen-mode .header h1 {
+            color: white;
+            font-size: 2.2em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 8px;
+        }
+
+        .fullscreen-mode .header .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1em;
+            font-weight: 300;
+        }
+
+        .fullscreen-mode .input-group {
+            padding: 25px 40px !important;
+            border-top: 2px solid var(--border-color);
+            background: var(--bg-color) !important;
+            width: 100% !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+            flex-shrink: 0 !important;
+        }
+
+        .fullscreen-mode .input-group input {
+            font-size: 18px;
+            padding: 15px 20px;
+            border-radius: 12px;
+        }
+
+        .fullscreen-mode .input-group button {
+            padding: 15px 25px;
+            font-size: 16px;
+            border-radius: 12px;
+        }
+
+        .fullscreen-mode .message {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 85%;
+        }
+
+        .fullscreen-mode .user {
+            font-size: 18px;
+            margin-left: 15%;
+        }
+
+        .fullscreen-mode .ai {
+            font-size: 18px;
+            margin-right: 15%;
+        }
+
+        .fullscreen-mode .quick-questions {
+            display: none; /* Oculta perguntas rápidas em tela cheia */
+        }
+
+        @keyframes expandFullscreen {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Melhor experiência de scroll no fullscreen */
+        .fullscreen-mode #chat-box::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .fullscreen-mode #chat-box::-webkit-scrollbar-track {
+            background: var(--input-bg);
+            border-radius: 6px;
+        }
+
+        .fullscreen-mode #chat-box::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 6px;
+            border: 2px solid var(--input-bg);
+        }
+
+        .fullscreen-mode #chat-box::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Overlay para tela cheia */
+        .fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9998;
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .fullscreen-overlay.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         /* Timestamp nas mensagens */
         .message-timestamp {
             font-size: 0.75em;
@@ -567,6 +771,18 @@
                 font-size: 14px;
             }
 
+            .fullscreen-btn {
+                top: 15px;
+                right: 100px;
+                width: 40px;
+                height: 40px;
+                padding: 10px;
+            }
+
+            .fullscreen-btn i {
+                font-size: 14px;
+            }
+
             .chat-container {
                 padding: 20px;
             }
@@ -651,6 +867,18 @@
                 font-size: 12px;
             }
 
+            .fullscreen-btn {
+                top: 10px;
+                right: 90px;
+                width: 36px;
+                height: 36px;
+                padding: 8px;
+            }
+
+            .fullscreen-btn i {
+                font-size: 12px;
+            }
+
             .theme-toggle span {
                 display: none; /* Oculta o texto em telas muito pequenas */
             }
@@ -716,6 +944,9 @@
             <button class="clear-chat-btn" onclick="clearChat()" id="clear-chat-btn" title="Limpar chat (Ctrl+L)">
                 <i class="fas fa-trash-alt"></i>
             </button>
+            <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fullscreen-btn" title="Tela cheia (Ctrl+F)">
+                <i class="fas fa-expand" id="fullscreen-icon"></i>
+            </button>
             <div class="status-indicator" id="status-indicator"></div>
             <h1><i class="fas fa-chart-line"></i> InvestBot</h1>
             <p>Seu Consultor de Investimentos com IA</p>
@@ -767,10 +998,14 @@
         </div>
     </div>
 
+    <!-- Overlay para tela cheia -->
+    <div class="fullscreen-overlay" id="fullscreen-overlay" onclick="toggleFullscreen()"></div>
+
     <!-- Tooltip de atalhos -->
     <div class="shortcuts-tooltip" id="shortcuts-tooltip">
         <div><kbd>Ctrl</kbd> + <kbd>L</kbd> - Limpar consultas</div>
         <div><kbd>Ctrl</kbd> + <kbd>T</kbd> - Modo escuro/claro</div>
+        <div><kbd>Ctrl</kbd> + <kbd>F</kbd> - Tela cheia</div>
         <div><kbd>Ctrl</kbd> + <kbd>?</kbd> - Atalhos disponíveis</div>
         <div><kbd>Enter</kbd> - Enviar pergunta</div>
     </div>
@@ -893,15 +1128,23 @@
                     showShortcutFeedback('🌙 Tema alterado!');
                 }
                 
+                // Ctrl + F - Tela cheia
+                if (e.ctrlKey && e.key === 'f') {
+                    e.preventDefault();
+                    toggleFullscreen();
+                    showShortcutFeedback('🖥️ Modo tela cheia!');
+                }
+                
                 // Ctrl + ? - Mostrar atalhos
                 if (e.ctrlKey && e.key === '/') {
                     e.preventDefault();
                     toggleShortcutsTooltip();
                 }
                 
-                // Esc - Fechar tooltip
+                // Esc - Fechar tooltip ou sair de tela cheia
                 if (e.key === 'Escape') {
                     hideShortcutsTooltip();
+                    exitFullscreen();
                 }
             });
         }
@@ -1040,6 +1283,58 @@
             userInput.value = question;
             sendMessage();
         }
+
+        // MODO TELA CHEIA
+        let isFullscreen = false;
+
+        function toggleFullscreen() {
+            const container = document.querySelector('.container');
+            const overlay = document.getElementById('fullscreen-overlay');
+            const fullscreenIcon = document.getElementById('fullscreen-icon');
+            
+            if (!isFullscreen) {
+                // Entrar em tela cheia
+                container.classList.add('fullscreen-mode');
+                document.body.classList.add('fullscreen-active');
+                overlay.classList.add('show');
+                fullscreenIcon.className = 'fas fa-compress';
+                document.body.style.overflow = 'hidden';
+                isFullscreen = true;
+                
+                // Scroll para o topo do chat
+                const chatBox = document.getElementById('chat-box');
+                chatBox.scrollTop = chatBox.scrollHeight;
+                
+            } else {
+                // Sair da tela cheia
+                exitFullscreen();
+            }
+        }
+
+        function exitFullscreen() {
+            if (isFullscreen) {
+                const container = document.querySelector('.container');
+                const overlay = document.getElementById('fullscreen-overlay');
+                const fullscreenIcon = document.getElementById('fullscreen-icon');
+                
+                container.classList.remove('fullscreen-mode');
+                document.body.classList.remove('fullscreen-active');
+                overlay.classList.remove('show');
+                fullscreenIcon.className = 'fas fa-expand';
+                document.body.style.overflow = 'auto';
+                isFullscreen = false;
+            }
+        }
+
+        // Impedir propagação do clique no container quando em tela cheia
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            container.addEventListener('click', function(e) {
+                if (isFullscreen) {
+                    e.stopPropagation();
+                }
+            });
+        });
     </script>
 </body>
 </html>
