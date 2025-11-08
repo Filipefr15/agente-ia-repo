@@ -42,15 +42,15 @@ def get_ai_response(user_message):
     
     # 💰 COMEÇAR A INVESTIR / INICIANTES (demais variações)
     elif any(phrase in msg for phrase in ["começar", "iniciar", "primeiro", "nunca investi", "iniciante", "como investir"]):
-        return """💡 **Primeiros Passos para Investir:**
+        return """💡 <strong>Primeiros Passos para Investir:</strong><br><br>
         
-1. 🎯 **Reserve sua emergência** - 6 meses de gastos em poupança
-2. 📚 **Estude o básico** - Renda fixa vs variável 
-3. 🏦 **Abra conta em corretora** - XP, Rico, Clear, Inter
-4. 💵 **Comece pequeno** - R$ 100/mês já faz diferença
-5. 📊 **Diversifique** - Não coloque tudo em um lugar
+1. 🎯 <strong>Reserve sua emergência</strong> - 6 meses de gastos em poupança<br>
+2. 📚 <strong>Estude o básico</strong> - Renda fixa vs variável<br>
+3. 🏦 <strong>Abra conta em corretora</strong> - XP, Rico, Clear, Inter<br>
+4. 💵 <strong>Comece pequeno</strong> - R$ 100/mês já faz diferença<br>
+5. 📊 <strong>Diversifique</strong> - Não coloque tudo em um lugar<br><br>
 
-**Sugestão inicial:** Tesouro IPCA+ (inflação) + algum fundo de ações. Quer saber sobre algum específico?"""
+<strong>Sugestão inicial:</strong> Tesouro IPCA+ (inflação) + algum fundo de ações. Quer saber sobre algum específico?"""
     
     # 📊 PERGUNTA ESPECÍFICA: Qual a diferença entre ações e fundos?
     elif "qual a diferença entre ações e fundos" in msg:
@@ -174,320 +174,320 @@ Só invista em ações o dinheiro que pode ficar parado por 5+ anos e que não f
     
     # 📈 AÇÕES E BOLSA
     elif any(phrase in msg for phrase in ["ação", "ações", "bolsa", "b3", "bovespa", "papéis"]):
-        return """📈 **Investimento em Ações:**
+        return """📈 <strong>Investimento em Ações:</strong><br><br>
         
-**Vantagens:** 
-• Potencial de altos retornos
-• Liquidez diária 
-• Proteção contra inflação
+<strong>Vantagens:</strong><br>
+• Potencial de altos retornos<br>
+• Liquidez diária<br>
+• Proteção contra inflação<br><br>
 
-**Riscos:**
-• Volatilidade alta
-• Pode perder dinheiro no curto prazo
-• Precisa de conhecimento
+<strong>Riscos:</strong><br>
+• Volatilidade alta<br>
+• Pode perder dinheiro no curto prazo<br>
+• Precisa de conhecimento<br><br>
 
-**Dica de ouro:** Invista apenas o que pode ficar parado por 5+ anos. Considere ETFs para diversificação automática (IVVB11, BOVA11).
+<strong>Dica de ouro:</strong> Invista apenas o que pode ficar parado por 5+ anos. Considere ETFs para diversificação automática (IVVB11, BOVA11).<br><br>
 
 Quer analisar alguma ação específica?"""
     
     # 🏛️ RENDA FIXA
     elif any(word in msg for word in ["renda fixa", "tesouro", "cdb", "lci", "lca", "selic", "ipca"]):
-        return """🏛️ **Renda Fixa - Investimentos Seguros:**
+        return """🏛️ <strong>Renda Fixa - Investimentos Seguros:</strong><br><br>
         
-**Tesouro Direto:**
-• 💚 Selic (juros curto prazo): 13,25% ao ano
-• 📊 IPCA+ (inflação): IPCA + 6% ao ano
-• 📅 Prefixado: Taxa fixa conhecida
+<strong>Tesouro Direto:</strong><br>
+• 💚 Selic (juros curto prazo): 13,25% ao ano<br>
+• 📊 IPCA+ (inflação): IPCA + 6% ao ano<br>
+• 📅 Prefixado: Taxa fixa conhecida<br><br>
 
-**CDBs de Bancos:**
-• 🏦 Grandes bancos: 95-100% do CDI
-• 🚀 Bancos digitais: até 120% do CDI
-• 🛡️ Garantia FGC até R$ 250 mil
+<strong>CDBs de Bancos:</strong><br>
+• 🏦 Grandes bancos: 95-100% do CDI<br>
+• 🚀 Bancos digitais: até 120% do CDI<br>
+• 🛡️ Garantia FGC até R$ 250 mil<br><br>
 
-**Recomendação:** 60% Tesouro IPCA+ / 40% CDB 120% CDI para começar."""
+<strong>Recomendação:</strong> 60% Tesouro IPCA+ / 40% CDB 120% CDI para começar."""
     
     # 📊 FUNDOS DE INVESTIMENTO
     elif any(word in msg for word in ["fundo", "fundos", "fii", "etf", "cotas"]):
-        return """📊 **Fundos de Investimento:**
+        return """📊 <strong>Fundos de Investimento:</strong><br><br>
         
-**ETFs (Recomendados):**
-• 🇺🇸 IVVB11: S&P 500 (ações americanas)
-• 🇧🇷 BOVA11: Ibovespa (ações brasileiras)
-• 💰 FIXA11: Renda fixa brasileira
+<strong>ETFs (Recomendados):</strong><br>
+• 🇺🇸 IVVB11: S&P 500 (ações americanas)<br>
+• 🇧🇷 BOVA11: Ibovespa (ações brasileiras)<br>
+• 💰 FIXA11: Renda fixa brasileira<br><br>
 
-**Fundos Imobiliários (FIIs):**
-• 🏢 Dividendos mensais
-• 🏠 Exposição ao mercado imobiliário
-• ⚠️ Risco médio-alto
+<strong>Fundos Imobiliários (FIIs):</strong><br>
+• 🏢 Dividendos mensais<br>
+• 🏠 Exposição ao mercado imobiliário<br>
+• ⚠️ Risco médio-alto<br><br>
 
-**Taxa de administração:** Prefira fundos com taxa < 1% ao ano. ETFs costumam ter as menores taxas!"""
+<strong>Taxa de administração:</strong> Prefira fundos com taxa &lt; 1% ao ano. ETFs costumam ter as menores taxas!"""
     
     # 💵 VALORES E QUANTO INVESTIR
     elif "quanto" in msg or "valor" in msg or "dinheiro" in msg or "reais" in msg or "mil" in msg or "salário" in msg or re.findall(r'r\$?\s*(\d+(?:\.\d{3})*(?:,\d{2})?|\d+)', msg):
-        return """💵 **Quanto Investir:**
+        return """💵 <strong>Quanto Investir:</strong><br><br>
         
-**Regra 50-30-20:**
-• 50% gastos essenciais
-• 30% gastos pessoais  
-• 20% investimentos + emergência
+<strong>Regra 50-30-20:</strong><br>
+• 50% gastos essenciais<br>
+• 30% gastos pessoais<br>
+• 20% investimentos + emergência<br><br>
 
-**Por faixa de renda:**
-• 📱 Até R$ 3.000: R$ 200/mês - Tesouro + CDB
-• 💼 R$ 3-8.000: R$ 500/mês - 70% renda fixa + 30% ações
-• 🚀 Acima R$ 8.000: R$ 1.000+ - Diversificação completa
+<strong>Por faixa de renda:</strong><br>
+• 📱 Até R$ 3.000: R$ 200/mês - Tesouro + CDB<br>
+• 💼 R$ 3-8.000: R$ 500/mês - 70% renda fixa + 30% ações<br>
+• 🚀 Acima R$ 8.000: R$ 1.000+ - Diversificação completa<br><br>
 
-**Meta:** Acumular 12x seus gastos mensais em 5-10 anos!"""
+<strong>Meta:</strong> Acumular 12x seus gastos mensais em 5-10 anos!"""
     
     # ⚠️ RISCOS E SEGURANÇA  
     elif any(word in msg for word in ["risco", "riscos", "seguro", "perder", "prejuízo", "perigoso"]):
-        return """⚠️ **Gestão de Riscos:**
+        return """⚠️ <strong>Gestão de Riscos:</strong><br><br>
         
-**Níveis de Risco:**
-• 🟢 **Baixo:** Tesouro, CDB, Poupança
-• 🟡 **Médio:** Fundos mistos, FIIs
-• 🔴 **Alto:** Ações individuais, Cripto
+<strong>Níveis de Risco:</strong><br>
+• 🟢 <strong>Baixo:</strong> Tesouro, CDB, Poupança<br>
+• 🟡 <strong>Médio:</strong> Fundos mistos, FIIs<br>
+• 🔴 <strong>Alto:</strong> Ações individuais, Cripto<br><br>
 
-**Regras de Ouro:**
-1. 🚫 Nunca invista dinheiro que precisa em < 2 anos
-2. 📊 Diversifique entre classes de ativos
-3. 📚 Só invista no que entende
-4. ⏰ Tempo é seu maior aliado
+<strong>Regras de Ouro:</strong><br>
+1. 🚫 Nunca invista dinheiro que precisa em &lt; 2 anos<br>
+2. 📊 Diversifique entre classes de ativos<br>
+3. 📚 Só invista no que entende<br>
+4. ⏰ Tempo é seu maior aliado<br><br>
 
-**Lembre-se:** Maior risco = maior retorno potencial (mas também maior chance de perda)."""
+<strong>Lembre-se:</strong> Maior risco = maior retorno potencial (mas também maior chance de perda)."""
     
     # 🌍 DIVERSIFICAÇÃO (outras variações além da pergunta específica)
     elif any(word in msg for word in ["diversificar", "diversificação", "carteira", "portfolio"]):
-        return """🌍 **Diversificação Inteligente:**
+        return """🌍 <strong>Diversificação Inteligente:</strong><br><br>
         
-**Carteira Balanceada:**
-• 🏛️ 40% Renda Fixa (Tesouro + CDB)
-• 🇧🇷 30% Ações Brasil (BOVA11 ou individuais)
-• 🇺🇸 20% Ações Exterior (IVVB11)
-• 🏢 10% FIIs (Fundos imobiliários)
+<strong>Carteira Balanceada:</strong><br>
+• 🏛️ 40% Renda Fixa (Tesouro + CDB)<br>
+• 🇧🇷 30% Ações Brasil (BOVA11 ou individuais)<br>
+• 🇺🇸 20% Ações Exterior (IVVB11)<br>
+• 🏢 10% FIIs (Fundos imobiliários)<br><br>
 
-**Por Idade:**
-• 👶 20-30 anos: 70% ações + 30% renda fixa
-• 👨‍💼 30-50 anos: 50% ações + 50% renda fixa  
-• 👴 50+ anos: 30% ações + 70% renda fixa
+<strong>Por Idade:</strong><br>
+• 👶 20-30 anos: 70% ações + 30% renda fixa<br>
+• 👨‍💼 30-50 anos: 50% ações + 50% renda fixa<br>
+• 👴 50+ anos: 30% ações + 70% renda fixa<br><br>
 
-**Rebalanceamento:** Ajuste a carteira a cada 6-12 meses."""
+<strong>Rebalanceamento:</strong> Ajuste a carteira a cada 6-12 meses."""
     
     # 💎 CRIPTOMOEDAS
     if any(word in msg for word in ["bitcoin", "crypto", "cripto", "btc", "ethereum"]):
-        return """💎 **Criptomoedas - Alto Risco:**
+        return """💎 <strong>Criptomoedas - Alto Risco:</strong><br><br>
         
-**⚠️ ATENÇÃO:** Extremamente volátil!
-• 📈 Pode valorizar 100%+ em meses
-• 📉 Pode desvalorizar 80%+ também
-• 🎲 Considere apenas 5-10% da carteira
+<strong>⚠️ ATENÇÃO:</strong> Extremamente volátil!<br>
+• 📈 Pode valorizar 100%+ em meses<br>
+• 📉 Pode desvalorizar 80%+ também<br>
+• 🎲 Considere apenas 5-10% da carteira<br><br>
 
-**Se for investir:**
-• 🏦 Use exchanges regulamentadas (Mercado Bitcoin, Binance)
-• 💰 Bitcoin e Ethereum são as mais estabelecidas
-• ⏰ Pense em anos, não dias
+<strong>Se for investir:</strong><br>
+• 🏦 Use exchanges regulamentadas (Mercado Bitcoin, Binance)<br>
+• 💰 Bitcoin e Ethereum são as mais estabelecidas<br>
+• ⏰ Pense em anos, não dias<br><br>
 
-**Regra:** Só invista o que pode perder 100% sem afetar sua vida!"""
+<strong>Regra:</strong> Só invista o que pode perder 100% sem afetar sua vida!"""
     
     # 🏠 FINANCIAMENTO IMOBILIÁRIO
     if any(word in msg for word in ["casa", "apartamento", "imóvel", "financiamento", "própria"]):
-        return """🏠 **Casa Própria vs Investimento:**
+        return """🏠 <strong>Casa Própria vs Investimento:</strong><br><br>
         
-**Vantagens da Casa Própria:**
-• 🛡️ Segurança emocional
-• 🏠 Patrimônio tangível
-• 📈 Proteção contra inflação do aluguel
+<strong>Vantagens da Casa Própria:</strong><br>
+• 🛡️ Segurança emocional<br>
+• 🏠 Patrimônio tangível<br>
+• 📈 Proteção contra inflação do aluguel<br><br>
 
-**Análise Financeira:**
-• 💰 Compare: prestação vs aluguel + investimento
-• 🧮 Considere: IPTU, condomínio, manutenção
-• ⏰ Imóvel demora para se valorizar (10+ anos)
+<strong>Análise Financeira:</strong><br>
+• 💰 Compare: prestação vs aluguel + investimento<br>
+• 🧮 Considere: IPTU, condomínio, manutenção<br>
+• ⏰ Imóvel demora para se valorizar (10+ anos)<br><br>
 
-**Dica:** Se prestação > 30% da renda, melhor alugar + investir a diferença em ações/fundos."""
+<strong>Dica:</strong> Se prestação &gt; 30% da renda, melhor alugar + investir a diferença em ações/fundos."""
     
     # 📚 EDUCAÇÃO FINANCEIRA
     if any(word in msg for word in ["aprender", "estudar", "livro", "curso", "educação"]):
-        return """📚 **Educação Financeira:**
+        return """📚 <strong>Educação Financeira:</strong><br><br>
         
-**Livros Essenciais:**
-• 📖 "Pai Rico, Pai Pobre" - Robert Kiyosaki
-• 💰 "O Investidor Inteligente" - Benjamin Graham  
-• 🧠 "Psicologia Financeira" - Morgan Housel
+<strong>Livros Essenciais:</strong><br>
+• 📖 "Pai Rico, Pai Pobre" - Robert Kiyosaki<br>
+• 💰 "O Investidor Inteligente" - Benjamin Graham<br>
+• 🧠 "Psicologia Financeira" - Morgan Housel<br><br>
 
-**Canais YouTube:**
-• 🎥 Primo Rico, Me Poupe!, Gustavo Cerbasi
+<strong>Canais YouTube:</strong><br>
+• 🎥 Primo Rico, Me Poupe!, Gustavo Cerbasi<br><br>
 
-**Cursos Gratuitos:**
-• 🏦 CVM (Comissão de Valores Mobiliários)
-• 📱 Apps: GuiaBolso, Organizze
+<strong>Cursos Gratuitos:</strong><br>
+• 🏦 CVM (Comissão de Valores Mobiliários)<br>
+• 📱 Apps: GuiaBolso, Organizze<br><br>
 
-**Dica:** 30min/dia de estudo = grande diferença em 1 ano!"""
+<strong>Dica:</strong> 30min/dia de estudo = grande diferença em 1 ano!"""
     
     # 🚨 GOLPES E FRAUDES
     if any(word in msg for word in ["golpe", "fraude", "pirâmide", "esquema", "fácil", "garantido"]):
-        return """🚨 **ALERTA: Como Evitar Golpes:**
+        return """🚨 <strong>ALERTA: Como Evitar Golpes:</strong><br><br>
         
-**Sinais de GOLPE:**
-• 🎯 Promessas de 20%+ ao mês
-• ⚡ "Ganhos rápidos e garantidos"
-• 👥 Pirâmides financeiras
-• 💎 "Oportunidade única"
+<strong>Sinais de GOLPE:</strong><br>
+• 🎯 Promessas de 20%+ ao mês<br>
+• ⚡ "Ganhos rápidos e garantidos"<br>
+• 👥 Pirâmides financeiras<br>
+• 💎 "Oportunidade única"<br><br>
 
-**NUNCA:**
-• Empreste CPF para "investimentos"
-• Invista sem entender
-• Acredite em "fórmulas mágicas"
-• Ignore a regulamentação CVM/BC
+<strong>NUNCA:</strong><br>
+• Empreste CPF para "investimentos"<br>
+• Invista sem entender<br>
+• Acredite em "fórmulas mágicas"<br>
+• Ignore a regulamentação CVM/BC<br><br>
 
-**SEMPRE verifique:** Empresa regulamentada, registros na CVM, reputação no Reclame Aqui."""
+<strong>SEMPRE verifique:</strong> Empresa regulamentada, registros na CVM, reputação no Reclame Aqui."""
     
     # 📱 TECNOLOGIA E APPS
     if any(word in msg for word in ["app", "aplicativo", "plataforma", "corretora", "conta"]):
-        return """📱 **Melhores Plataformas:**
+        return """📱 <strong>Melhores Plataformas:</strong><br><br>
         
-**Corretoras Recomendadas:**
-• 🏆 XP Investimentos (completa)
-• 💎 Rico (foco renda fixa)  
-• 🚀 Clear (day trade)
-• 🏦 Inter Invest (banco digital)
+<strong>Corretoras Recomendadas:</strong><br>
+• 🏆 XP Investimentos (completa)<br>
+• 💎 Rico (foco renda fixa)<br>
+• 🚀 Clear (day trade)<br>
+• 🏦 Inter Invest (banco digital)<br><br>
 
-**Apps Úteis:**
-• 📊 Status Invest (análises)
-• 💰 TradeMap (acompanhamento)
-• 📈 Yahoo Finanças (cotações)
+<strong>Apps Úteis:</strong><br>
+• 📊 Status Invest (análises)<br>
+• 💰 TradeMap (acompanhamento)<br>
+• 📈 Yahoo Finanças (cotações)<br><br>
 
-**Dicas:** 
-• Compare taxas antes de escolher
-• Prefira taxa zero para pessoa física
+<strong>Dicas:</strong><br>
+• Compare taxas antes de escolher<br>
+• Prefira taxa zero para pessoa física<br>
 • Teste a plataforma com pouco dinheiro primeiro"""
     
     # 🎯 OBJETIVOS FINANCEIROS
     if any(word in msg for word in ["objetivo", "meta", "aposentadoria", "independência", "liberdade"]):
-        return """🎯 **Planejamento de Objetivos:**
+        return """🎯 <strong>Planejamento de Objetivos:</strong><br><br>
         
-**Independência Financeira:**
-• 💰 Meta: 25x seus gastos anuais investidos
-• 📈 Retorno 4% ao ano = viver de renda
-• ⏰ Com R$ 2.000/mês investidos: ~20 anos
+<strong>Independência Financeira:</strong><br>
+• 💰 Meta: 25x seus gastos anuais investidos<br>
+• 📈 Retorno 4% ao ano = viver de renda<br>
+• ⏰ Com R$ 2.000/mês investidos: ~20 anos<br><br>
 
-**Aposentadoria:**
-• 🏦 INSS: máximo R$ 7.500/mês  
-• 💼 Previdência privada como complemento
-• 📊 Carteira própria: mais flexibilidade
+<strong>Aposentadoria:</strong><br>
+• 🏦 INSS: máximo R$ 7.500/mês<br>
+• 💼 Previdência privada como complemento<br>
+• 📊 Carteira própria: mais flexibilidade<br><br>
 
-**Fórmula do Sucesso:** Gastar < Ganhar + Investir a diferença + Tempo + Juros compostos"""
+<strong>Fórmula do Sucesso:</strong> Gastar &lt; Ganhar + Investir a diferença + Tempo + Juros compostos"""
     
     # 🔄 REBALANCEAMENTO
     if any(word in msg for word in ["rebalancear", "rebalanceamento", "ajustar", "revisar"]):
-        return """🔄 **Rebalanceamento de Carteira:**
+        return """🔄 <strong>Rebalanceamento de Carteira:</strong><br><br>
         
-**Quando fazer:**
-• ⏰ A cada 6-12 meses
-• 📊 Quando algum ativo sair 5%+ do target
-• 💰 Quando aportar valores grandes
+<strong>Quando fazer:</strong><br>
+• ⏰ A cada 6-12 meses<br>
+• 📊 Quando algum ativo sair 5%+ do target<br>
+• 💰 Quando aportar valores grandes<br><br>
 
-**Como fazer:**
-• 📈 Venda ativos que subiram muito
-• 📉 Compre ativos que caíram
-• 💵 Use novos aportes para equilibrar
+<strong>Como fazer:</strong><br>
+• 📈 Venda ativos que subiram muito<br>
+• 📉 Compre ativos que caíram<br>
+• 💵 Use novos aportes para equilibrar<br><br>
 
-**Exemplo:** Se ações subiram de 30% para 45% da carteira, venda até voltar aos 30%."""
+<strong>Exemplo:</strong> Se ações subiram de 30% para 45% da carteira, venda até voltar aos 30%."""
     
     # 📊 ANÁLISE TÉCNICA
     if any(word in msg for word in ["análise", "gráfico", "indicador", "suporte", "resistência"]):
-        return """📊 **Análise de Investimentos:**
+        return """📊 <strong>Análise de Investimentos:</strong><br><br>
         
-**Para Ações - Análise Fundamentalista:**
-• 💰 P/L: Preço/Lucro (prefira < 15)
-• 📈 ROE: Retorno sobre patrimônio (> 15%)
-• 💵 Dividend Yield: Dividendos/Preço (> 5%)
+<strong>Para Ações - Análise Fundamentalista:</strong><br>
+• 💰 P/L: Preço/Lucro (prefira &lt; 15)<br>
+• 📈 ROE: Retorno sobre patrimônio (&gt; 15%)<br>
+• 💵 Dividend Yield: Dividendos/Preço (&gt; 5%)<br><br>
 
-**Indicadores Macroeconômicos:**
-• 🏛️ Taxa Selic: Afeta renda fixa
-• 📊 IPCA: Inflação oficial
-• 💱 Dólar: Impacta ações e importações
+<strong>Indicadores Macroeconômicos:</strong><br>
+• 🏛️ Taxa Selic: Afeta renda fixa<br>
+• 📊 IPCA: Inflação oficial<br>
+• 💱 Dólar: Impacta ações e importações<br><br>
 
-**Dica:** Para pessoa física, análise fundamentalista > técnica. Foque no longo prazo!"""
+<strong>Dica:</strong> Para pessoa física, análise fundamentalista &gt; técnica. Foque no longo prazo!"""
     
     # 💡 CASES DE SUCESSO / EXEMPLOS
     if any(word in msg for word in ["exemplo", "simulação", "caso", "prática", "real"]):
-        return """💡 **Exemplo Prático - Carteira R$ 1.000/mês:**
+        return """💡 <strong>Exemplo Prático - Carteira R$ 1.000/mês:</strong><br><br>
         
-**Distribuição Mensal:**
-• 🏛️ R$ 400 - Tesouro IPCA+ 2029 (40%)
-• 🇧🇷 R$ 300 - BOVA11 (ETF Ibovespa - 30%)  
-• 🇺🇸 R$ 200 - IVVB11 (ETF S&P500 - 20%)
-• 🏢 R$ 100 - HGLG11 (FII - 10%)
+<strong>Distribuição Mensal:</strong><br>
+• 🏛️ R$ 400 - Tesouro IPCA+ 2029 (40%)<br>
+• 🇧🇷 R$ 300 - BOVA11 (ETF Ibovespa - 30%)<br>
+• 🇺🇸 R$ 200 - IVVB11 (ETF S&P500 - 20%)<br>
+• 🏢 R$ 100 - HGLG11 (FII - 10%)<br><br>
 
-**Projeção 10 anos (7% a.a.):**
-• 💰 Investido: R$ 120.000
-• 📈 Valor final: ~R$ 170.000
-• 🎯 Ganho: R$ 50.000
+<strong>Projeção 10 anos (7% a.a.):</strong><br>
+• 💰 Investido: R$ 120.000<br>
+• 📈 Valor final: ~R$ 170.000<br>
+• 🎯 Ganho: R$ 50.000<br><br>
 
-**Resultado:** Patrimônio para gerar R$ 850/mês de renda passiva!"""
+<strong>Resultado:</strong> Patrimônio para gerar R$ 850/mês de renda passiva!"""
 
     # 🤖 SOBRE O BOT
     if any(word in msg for word in ["quem é você", "bot", "ia", "inteligência", "robô"]):
-        return """🤖 **Sobre o InvestBot:**
+        return """🤖 <strong>Sobre o InvestBot:</strong><br><br>
         
-Sou uma IA especializada em educação financeira e consultoria de investimentos! 
+Sou uma IA especializada em educação financeira e consultoria de investimentos!<br><br>
         
-**Posso ajudar com:**
-• 📚 Educação financeira básica
-• 💰 Sugestões de investimentos 
-• 📊 Análise de carteiras
-• ⚠️ Orientação sobre riscos
-• 🎯 Planejamento financeiro
+<strong>Posso ajudar com:</strong><br>
+• 📚 Educação financeira básica<br>
+• 💰 Sugestões de investimentos<br>
+• 📊 Análise de carteiras<br>
+• ⚠️ Orientação sobre riscos<br>
+• 🎯 Planejamento financeiro<br><br>
 
-**⚠️ Importante:** Minhas orientações são educativas. Sempre consulte um especialista antes de grandes decisões financeiras!"""
+<strong>⚠️ Importante:</strong> Minhas orientações são educativas. Sempre consulte um especialista antes de grandes decisões financeiras!"""
     
     # 📞 CONTATO E SUPORTE
     if any(word in msg for word in ["ajuda", "suporte", "contato", "dúvida"]):
-        return """📞 **Como posso ajudar mais:**
+        return """📞 <strong>Como posso ajudar mais:</strong><br><br>
         
-**Pergunte sobre:**
-• 💰 "Como investir R$ 5.000?"
-• 📊 "Qual a melhor carteira para iniciante?"
-• 🏠 "Vale a pena comprar casa própria?"
-• ⚠️ "Quais os riscos das ações?"
-• 🎯 "Como planejar aposentadoria?"
+<strong>Pergunte sobre:</strong><br>
+• 💰 "Como investir R$ 5.000?"<br>
+• 📊 "Qual a melhor carteira para iniciante?"<br>
+• 🏠 "Vale a pena comprar casa própria?"<br>
+• ⚠️ "Quais os riscos das ações?"<br>
+• 🎯 "Como planejar aposentadoria?"<br><br>
 
-**Ou use os botões de perguntas rápidas acima!** 
+<strong>Ou use os botões de perguntas rápidas acima!</strong><br><br>
         
 Estou aqui 24/7 para turbinar sua educação financeira! 🚀"""
     
     # 🔍 PESQUISA/BUSCA GENÉRICA
     if any(word in msg for word in ["pesquisar", "buscar", "encontrar", "procurar"]):
-        return """🔍 **O que gostaria de pesquisar?**
+        return """🔍 <strong>O que gostaria de pesquisar?</strong><br><br>
         
-**Tópicos populares:**
-• 💰 Investimentos para iniciantes
-• 📈 Ações vs Fundos de investimento  
-• 🏛️ Renda fixa vs Renda variável
-• 🏠 Casa própria vs Aluguel + Investimento
-• ⚠️ Como avaliar riscos de investimento
-• 🎯 Planejamento para aposentadoria
+<strong>Tópicos populares:</strong><br>
+• 💰 Investimentos para iniciantes<br>
+• 📈 Ações vs Fundos de investimento<br>
+• 🏛️ Renda fixa vs Renda variável<br>
+• 🏠 Casa própria vs Aluguel + Investimento<br>
+• ⚠️ Como avaliar riscos de investimento<br>
+• 🎯 Planejamento para aposentadoria<br><br>
 
 Digite sua dúvida específica que eu explico detalhadamente! 💡"""
     
     # ❓ RESPOSTA PADRÃO INTELIGENTE
     else:
-        return f"""🤔 **Interessante pergunta sobre:** "{user_message}"
+        return f"""🤔 <strong>Interessante pergunta sobre:</strong> "{user_message}"<br><br>
         
-Ainda estou aprendendo sobre esse tópico específico! Mas posso ajudar com:
+Ainda estou aprendendo sobre esse tópico específico! Mas posso ajudar com:<br><br>
 
-**💰 Investimentos Básicos:**
-• Tesouro Direto, CDBs, Fundos, Ações
-• Como começar a investir
-• Análise de riscos
+<strong>💰 Investimentos Básicos:</strong><br>
+• Tesouro Direto, CDBs, Fundos, Ações<br>
+• Como começar a investir<br>
+• Análise de riscos<br><br>
 
-**📊 Planejamento Financeiro:**  
-• Organização de gastos
-• Metas de investimento
-• Aposentadoria
+<strong>📊 Planejamento Financeiro:</strong><br>
+• Organização de gastos<br>
+• Metas de investimento<br>
+• Aposentadoria<br><br>
 
-**Reformule sua pergunta ou escolha um dos temas acima!** 
+<strong>Reformule sua pergunta ou escolha um dos temas acima!</strong><br><br>
         
-*Exemplo: "Como investir R$ 1.000 por mês?" ou "Qual o melhor investimento para iniciantes?"* 🎯"""
+<em>Exemplo: "Como investir R$ 1.000 por mês?" ou "Qual o melhor investimento para iniciantes?"</em> 🎯"""
 
 @app.route('/api/chat', methods=['POST'])
 def chat():

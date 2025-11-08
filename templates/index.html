@@ -123,11 +123,11 @@
         #chat-box {
             background: var(--chat-bg);
             border-radius: 15px;
-            padding: 20px;
+            padding: 15px;
             height: 400px;
             overflow-y: auto;
             margin-bottom: 20px;
-            border: 2px solid var(--chat-border);
+            border: 1px solid var(--chat-border);
             scrollbar-width: thin;
             scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
             transition: all 0.3s ease;
@@ -148,15 +148,15 @@
         }
 
         .message {
-            margin-bottom: 15px;
-            padding: 15px;
-            border-radius: 15px;
+            margin-bottom: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 75%;
             animation: messageSlide 0.3s ease-out;
-            line-height: 1.5;
+            line-height: 1.4;
             position: relative;
-        }
-
-        @keyframes messageSlide {
+            font-size: 14px;
+        }        @keyframes messageSlide {
             from {
                 opacity: 0;
                 transform: translateX(-20px);
@@ -170,8 +170,9 @@
         .user {
             background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
             color: white;
-            margin-left: 20%;
+            margin-left: 25%;
             border-bottom-right-radius: 5px;
+            font-size: 13px;
         }
 
         .user::before {
@@ -181,11 +182,13 @@
             margin-right: 10px;
         }
 
-        .ai {
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+                .ai {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
             color: white;
-            margin-right: 20%;
+            border-left: 3px solid #27ae60;
+            margin-right: 25%;
             border-bottom-left-radius: 5px;
+            font-size: 13px;
         }
 
         .ai::before {
@@ -559,20 +562,21 @@
         }
 
         .fullscreen-mode .message {
-            margin-bottom: 20px;
-            padding: 20px;
-            border-radius: 15px;
-            max-width: 85%;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            border-radius: 12px;
+            max-width: 80%;
+            font-size: 15px;
         }
 
         .fullscreen-mode .user {
-            font-size: 18px;
-            margin-left: 15%;
+            font-size: 14px;
+            margin-left: 20%;
         }
 
         .fullscreen-mode .ai {
-            font-size: 18px;
-            margin-right: 15%;
+            font-size: 14px;
+            margin-right: 20%;
         }
 
         .fullscreen-mode .quick-questions {
@@ -634,35 +638,40 @@
 
         /* Timestamp nas mensagens */
         .message-timestamp {
-            font-size: 0.75em;
-            opacity: 0.7;
-            margin-top: 5px;
+            font-size: 10px;
+            opacity: 0.5;
+            margin-top: 3px;
             text-align: right;
         }
 
         /* Animação de digitando */
         .typing-indicator {
             display: none;
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            color: white;
+            background: linear-gradient(135deg, rgba(17, 153, 142, 0.1) 0%, rgba(56, 239, 125, 0.1) 100%);
+            border: 1px solid rgba(17, 153, 142, 0.3);
+            color: var(--text-color);
             margin-right: 20%;
             border-bottom-left-radius: 5px;
-            padding: 15px;
+            padding: 12px 20px;
             border-radius: 15px;
             margin-bottom: 15px;
+            backdrop-filter: blur(5px);
+            animation: fadeInMessage 0.3s ease-out;
         }
 
         .typing-dots {
             display: inline-flex;
-            gap: 3px;
+            gap: 4px;
+            margin-left: 8px;
         }
 
         .typing-dots span {
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.7);
+            width: 6px;
+            height: 6px;
+            background: var(--primary-color);
             border-radius: 50%;
-            animation: typingAnimation 1.4s infinite ease-in-out;
+            animation: typingAnimation 1.2s infinite ease-in-out;
+            opacity: 0.6;
         }
 
         .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
@@ -903,16 +912,16 @@
 
         .quick-question-btn {
             background: var(--input-bg);
-            border: 2px solid var(--input-border);
-            border-radius: 25px;
-            padding: 8px 16px;
-            font-size: 13px;
+            border: 1px solid var(--input-border);
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 12px;
             color: var(--text-color);
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
 
         .quick-question-btn:hover {
@@ -955,16 +964,12 @@
         <div class="chat-container">
             <div id="chat-box">
                 <div class="message ai">
-                    <strong>💰 Bem-vindo ao InvestBot!</strong> Sou seu consultor de investimentos pessoal.
+                    <span style="opacity: 0.7; font-size: 11px;">💡 InvestBot:</span> Olá! Sou seu assistente de investimentos. Como posso ajudar?
                     <div class="message-timestamp" id="initial-timestamp"></div>
                 </div>
-                <div class="message ai">
-                    <strong>📊 Como posso ajudar?</strong> Pergunte sobre: ações, renda fixa, fundos, diversificação, análise de riscos, ou estratégias de investimento.
-                    <div class="message-timestamp" id="initial-timestamp2"></div>
-                </div>
                 <div class="typing-indicator message" id="typing-indicator">
-                    <i class="fas fa-chart-line" style="margin-right: 10px;"></i>
-                    <strong>InvestBot está analisando</strong>
+                    <i class="fas fa-brain" style="margin-right: 8px; opacity: 0.7; font-size: 14px;"></i>
+                    <span style="font-size: 14px; opacity: 0.8;">Analisando sua consulta</span>
                     <div class="typing-dots">
                         <span></span>
                         <span></span>
@@ -1083,11 +1088,7 @@
             const chatBox = document.getElementById('chat-box');
             chatBox.innerHTML = `
                 <div class="message ai">
-                    <strong>💰 Bem-vindo ao InvestBot!</strong> Sou seu consultor de investimentos pessoal.
-                    <div class="message-timestamp">${getCurrentTimestamp()}</div>
-                </div>
-                <div class="message ai">
-                    <strong>📊 Como posso ajudar?</strong> Pergunte sobre: ações, renda fixa, fundos, diversificação, análise de riscos, ou estratégias de investimento.
+                    <span style="opacity: 0.7; font-size: 11px;">💡 InvestBot:</span> Olá! Sou seu assistente de investimentos. Como posso ajudar?
                     <div class="message-timestamp">${getCurrentTimestamp()}</div>
                 </div>
             `;
@@ -1218,7 +1219,7 @@
             const statusIndicator = document.getElementById('status-indicator');
 
             // 1. Adiciona a mensagem do usuário primeiro
-            appendMessage('user', '<strong>Investidor:</strong> ' + messageText);
+            appendMessage('user', '<span style="opacity: 0.7; font-size: 11px;">Você:</span> ' + messageText);
             userInput.value = '';
 
             // Desabilita o botão durante o envio
@@ -1254,7 +1255,7 @@
                 hideTypingIndicator();
                 
                 // Exibe a resposta recebida do servidor Flask
-                appendMessage('ai', '<strong>InvestBot:</strong> ' + data.response);
+                appendMessage('ai', '<span style="opacity: 0.7; font-size: 11px;">💡 InvestBot:</span> ' + data.response);
                 statusIndicator.style.background = 'var(--success-color)';
 
             } catch (error) {
@@ -1279,9 +1280,60 @@
         });
 
         // PERGUNTAS RÁPIDAS PARA INVESTIMENTOS
-        function askQuickQuestion(question) {
-            userInput.value = question;
-            sendMessage();
+        async function askQuickQuestion(question) {
+            const sendButton = document.getElementById('send-button');
+            const statusIndicator = document.getElementById('status-indicator');
+
+            // 1. Primeiro mostra a pergunta do usuário
+            appendMessage('user', '<span style="opacity: 0.7; font-size: 11px;">Você:</span> ' + question);
+            
+            // Limpa o input
+            userInput.value = '';
+
+            // Desabilita o botão durante o envio
+            sendButton.disabled = true;
+            sendButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analisando...';
+            statusIndicator.style.background = 'var(--warning-color)';
+
+            // 2. Depois mostra indicador de digitando
+            showTypingIndicator();
+
+            try {
+                // Simula delay mínimo para mostrar animação de digitando
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                // Requisição assíncrona POST para o servidor Flask
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: question })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Erro de rede ou servidor: Status ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                // Esconde indicador de digitando
+                hideTypingIndicator();
+                
+                // 3. Por fim mostra a resposta do bot
+                appendMessage('ai', '<span style="opacity: 0.7; font-size: 11px;">💡 InvestBot:</span> ' + data.response);
+                statusIndicator.style.background = 'var(--success-color)';
+
+            } catch (error) {
+                console.error('Erro de Comunicação:', error);
+                hideTypingIndicator();
+                appendMessage('error', '<strong>⚠️ Conexão Perdida!</strong> O servidor de investimentos está offline. Verifique se o <strong>app.py</strong> está rodando.<br><small>Detalhe: ' + error.message + '</small>');
+                statusIndicator.style.background = 'var(--danger-color)';
+            } finally {
+                // Reabilita o botão
+                sendButton.disabled = false;
+                sendButton.innerHTML = '<i class="fas fa-paper-plane"></i> Consultar';
+            }
         }
 
         // MODO TELA CHEIA
