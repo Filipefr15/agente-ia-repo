@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvestBot - Consultor de Investimentos IA</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            --container-bg: rgba(255, 255, 255, 0.95);
+            --header-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            --chat-bg: #f8f9fa;
+            --chat-border: #e9ecef;
+            --text-color: #2c3e50;
+            --input-bg: white;
+            --input-border: #e9ecef;
+            --placeholder-color: #7f8c8d;
+            --scrollbar-track: #ecf0f1;
+            --scrollbar-thumb: #3498db;
+            --shadow-color: rgba(30, 60, 114, 0.15);
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+        }
+
+        [data-theme="dark"] {
+            --bg-gradient: linear-gradient(135deg, #0c1427 0%, #1a1a2e 100%);
+            --container-bg: rgba(20, 25, 40, 0.95);
+            --header-gradient: linear-gradient(135deg, #0c1427 0%, #1a1a2e 100%);
+            --chat-bg: #1e2a3a;
+            --chat-border: #2c3e50;
+            --text-color: #ecf0f1;
+            --input-bg: #1e2a3a;
+            --input-border: #34495e;
+            --placeholder-color: #7f8c8d;
+            --scrollbar-track: #2c3e50;
+            --scrollbar-thumb: #3498db;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --success-color: #2ecc71;
+            --warning-color: #f1c40f;
+            --danger-color: #e74c3c;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .container {
+            background: var(--container-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px var(--shadow-color);
+            width: 100%;
+            max-width: 800px;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: var(--header-gradient);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+            position: relative;
+            z-index: 5;
+        }
+
+        .chat-container {
+            padding: 30px;
+        }
+
+        #chat-box {
+            background: var(--chat-bg);
+            border-radius: 15px;
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            border: 2px solid var(--chat-border);
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+            transition: all 0.3s ease;
+        }
+
+        #chat-box::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #chat-box::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+            border-radius: 10px;
+        }
+
+        #chat-box::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 10px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 15px;
+            animation: messageSlide 0.3s ease-out;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .user {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            margin-left: 20%;
+            border-bottom-right-radius: 5px;
+        }
+
+        .user::before {
+            content: '\f2bd';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 10px;
+        }
+
+        .ai {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            margin-right: 20%;
+            border-bottom-left-radius: 5px;
+        }
+
+        .ai::before {
+            content: '\f201';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 10px;
+        }
+
+        .error {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border-left: 4px solid #c0392b;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .error::before {
+            content: '\f071';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 10px;
+        }
+
+        /* Ajustes para modo escuro */
+        [data-theme="dark"] .user {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        }
+
+        [data-theme="dark"] .ai {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+        }
+
+        [data-theme="dark"] .error {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        /* Mensagem de sucesso para investimentos */
+        .success {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            border-left: 4px solid #27ae60;
+            margin-right: 20%;
+            border-bottom-left-radius: 5px;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            animation: messageSlide 0.3s ease-out;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .success::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 10px;
+        }
+
+        /* Mensagem de aviso para investimentos */
+        .warning {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            border-left: 4px solid #f39c12;
+            margin-right: 20%;
+            border-bottom-left-radius: 5px;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            animation: messageSlide 0.3s ease-out;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .warning::before {
+            content: '\f06a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 10px;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .input-area {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            background: var(--input-bg);
+            padding: 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px var(--shadow-color);
+            border: 2px solid var(--input-border);
+            transition: all 0.3s ease;
+        }
+
+        .input-area:focus-within {
+            border-color: #667eea;
+            box-shadow: 0 5px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        #user-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            padding: 15px 20px;
+            background: transparent;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        #user-input::placeholder {
+            color: var(--placeholder-color);
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .send-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .send-button:active {
+            transform: translateY(0);
+        }
+
+        .send-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 12px;
+            height: 12px;
+            background: var(--success-color);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            z-index: 8;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Toggle do Modo Escuro */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50px;
+            padding: 12px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+            width: 44px;
+            height: 44px;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle i {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover i {
+            transform: rotate(180deg);
+        }
+
+        /* Botão Limpar Chat */
+        .clear-chat-btn {
+            position: absolute;
+            top: 20px;
+            right: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50px;
+            padding: 12px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+            width: 44px;
+            height: 44px;
+        }
+
+        .clear-chat-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .clear-chat-btn i {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .clear-chat-btn:hover i {
+            transform: rotate(180deg);
+        }
+
+        /* Timestamp nas mensagens */
+        .message-timestamp {
+            font-size: 0.75em;
+            opacity: 0.7;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        /* Animação de digitando */
+        .typing-indicator {
+            display: none;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            margin-right: 20%;
+            border-bottom-left-radius: 5px;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .typing-dots {
+            display: inline-flex;
+            gap: 3px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typingAnimation {
+            0%, 80%, 100% { 
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Loading skeleton */
+        .skeleton-message {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 15px;
+            height: 20px;
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .skeleton-message {
+            background: linear-gradient(90deg, #3a3a3a 25%, #2a2a2a 50%, #3a3a3a 75%);
+            background-size: 200% 100%;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Tooltip para atalhos */
+        .shortcuts-tooltip {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 12px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .shortcuts-tooltip.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .shortcuts-tooltip kbd {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .theme-toggle {
+                top: 15px;
+                left: 15px;
+                padding: 10px;
+                font-size: 12px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .theme-toggle i {
+                font-size: 16px;
+            }
+
+            .clear-chat-btn {
+                top: 15px;
+                right: 55px;
+                width: 40px;
+                height: 40px;
+                padding: 10px;
+            }
+
+            .clear-chat-btn i {
+                font-size: 14px;
+            }
+
+            .chat-container {
+                padding: 20px;
+            }
+
+            #chat-box {
+                height: 300px;
+                padding: 15px;
+            }
+
+            .message {
+                padding: 12px;
+            }
+
+            .user {
+                margin-left: 10%;
+            }
+
+            .ai {
+                margin-right: 10%;
+            }
+
+            .input-area {
+                padding: 15px;
+                gap: 10px;
+            }
+
+            #user-input {
+                padding: 12px 15px;
+            }
+
+            .send-button {
+                padding: 12px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .user, .ai {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .input-area {
+                flex-direction: column;
+                border-radius: 15px;
+            }
+
+            .send-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .theme-toggle {
+                top: 10px;
+                left: 10px;
+                padding: 8px;
+                font-size: 11px;
+                width: 36px;
+                height: 36px;
+            }
+
+            .theme-toggle i {
+                font-size: 14px;
+            }
+
+            .clear-chat-btn {
+                top: 10px;
+                right: 50px;
+                width: 36px;
+                height: 36px;
+                padding: 8px;
+            }
+
+            .clear-chat-btn i {
+                font-size: 12px;
+            }
+
+            .theme-toggle span {
+                display: none; /* Oculta o texto em telas muito pequenas */
+            }
+
+            .shortcuts-tooltip {
+                display: none; /* Oculta tooltip em mobile */
+            }
+
+            .quick-questions {
+                display: none; /* Oculta perguntas rápidas em mobile */
+            }
+        }
+
+        /* Perguntas rápidas para investimentos */
+        .quick-questions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .quick-question-btn {
+            background: var(--input-bg);
+            border: 2px solid var(--input-border);
+            border-radius: 25px;
+            padding: 8px 16px;
+            font-size: 13px;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .quick-question-btn:hover {
+            border-color: var(--scrollbar-thumb);
+            background: var(--scrollbar-thumb);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .quick-questions {
+                gap: 8px;
+            }
+
+            .quick-question-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="theme-toggle" onclick="toggleTheme()" id="theme-toggle" title="Alternar tema (Ctrl+T)">
+                <i class="fas fa-moon" id="theme-icon"></i>
+                <!-- <span id="theme-text">Escuro</span> -->
+            </button>
+            <button class="clear-chat-btn" onclick="clearChat()" id="clear-chat-btn" title="Limpar chat (Ctrl+L)">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+            <div class="status-indicator" id="status-indicator"></div>
+            <h1><i class="fas fa-chart-line"></i> InvestBot</h1>
+            <p>Seu Consultor de Investimentos com IA</p>
+        </div>
+        
+        <div class="chat-container">
+            <div id="chat-box">
+                <div class="message ai">
+                    <strong>💰 Bem-vindo ao InvestBot!</strong> Sou seu consultor de investimentos pessoal.
+                    <div class="message-timestamp" id="initial-timestamp"></div>
+                </div>
+                <div class="message ai">
+                    <strong>📊 Como posso ajudar?</strong> Pergunte sobre: ações, renda fixa, fundos, diversificação, análise de riscos, ou estratégias de investimento.
+                    <div class="message-timestamp" id="initial-timestamp2"></div>
+                </div>
+                <div class="typing-indicator message" id="typing-indicator">
+                    <i class="fas fa-chart-line" style="margin-right: 10px;"></i>
+                    <strong>InvestBot está analisando</strong>
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quick-questions">
+                <button class="quick-question-btn" onclick="askQuickQuestion('Como começar a investir com pouco dinheiro?')">
+                    <i class="fas fa-seedling"></i> Começar a investir
+                </button>
+                <button class="quick-question-btn" onclick="askQuickQuestion('Qual a diferença entre ações e fundos?')">
+                    <i class="fas fa-chart-bar"></i> Ações vs Fundos
+                </button>
+                <button class="quick-question-btn" onclick="askQuickQuestion('Como diversificar minha carteira?')">
+                    <i class="fas fa-layer-group"></i> Diversificação
+                </button>
+                <button class="quick-question-btn" onclick="askQuickQuestion('Quais os riscos de investir em ações?')">
+                    <i class="fas fa-exclamation-triangle"></i> Análise de Risco
+                </button>
+            </div>
+            
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="Ex: Como investir R$ 10.000? Qual a melhor ação hoje?">
+                <button class="send-button" onclick="sendMessage()" id="send-button">
+                    <i class="fas fa-paper-plane"></i>
+                    Consultar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tooltip de atalhos -->
+    <div class="shortcuts-tooltip" id="shortcuts-tooltip">
+        <div><kbd>Ctrl</kbd> + <kbd>L</kbd> - Limpar consultas</div>
+        <div><kbd>Ctrl</kbd> + <kbd>T</kbd> - Modo escuro/claro</div>
+        <div><kbd>Ctrl</kbd> + <kbd>?</kbd> - Atalhos disponíveis</div>
+        <div><kbd>Enter</kbd> - Enviar pergunta</div>
+    </div>
+
+    <script>
+        // LÓGICA JAVASCRIPT PARA COMUNICAR COM O FLASK
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        const API_URL = 'https://bookish-capybara-jj4j6x6rg4whpvx9-5000.app.github.dev/api/chat'; // URL do endpoint Flask
+
+        // MODO ESCURO/CLARO
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (savedTheme === 'dark') {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-sun';
+                themeText.textContent = 'Claro';
+            } else {
+                body.removeAttribute('data-theme');
+                themeIcon.className = 'fas fa-moon';
+                themeText.textContent = 'Escuro';
+            }
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            const isDark = body.hasAttribute('data-theme');
+            
+            if (isDark) {
+                body.removeAttribute('data-theme');
+                themeIcon.className = 'fas fa-moon';
+                themeText.textContent = 'Escuro';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fas fa-sun';
+                themeText.textContent = 'Claro';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Inicializa o tema ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTheme();
+            initializeTimestamps();
+            setupKeyboardShortcuts();
+        });
+
+        // TIMESTAMPS NAS MENSAGENS
+        function getCurrentTimestamp() {
+            const now = new Date();
+            return now.toLocaleTimeString('pt-BR', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+        }
+
+        function initializeTimestamps() {
+            const timestamp1 = document.getElementById('initial-timestamp');
+            const timestamp2 = document.getElementById('initial-timestamp2');
+            const currentTime = getCurrentTimestamp();
+            
+            if (timestamp1) timestamp1.textContent = currentTime;
+            if (timestamp2) timestamp2.textContent = currentTime;
+        }
+
+        // LIMPAR CHAT
+        function clearChat() {
+            const chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML = `
+                <div class="message ai">
+                    <strong>💰 Bem-vindo ao InvestBot!</strong> Sou seu consultor de investimentos pessoal.
+                    <div class="message-timestamp">${getCurrentTimestamp()}</div>
+                </div>
+                <div class="message ai">
+                    <strong>📊 Como posso ajudar?</strong> Pergunte sobre: ações, renda fixa, fundos, diversificação, análise de riscos, ou estratégias de investimento.
+                    <div class="message-timestamp">${getCurrentTimestamp()}</div>
+                </div>
+            `;
+            
+            // Efeito visual de limpeza
+            chatBox.style.opacity = '0.5';
+            setTimeout(() => {
+                chatBox.style.opacity = '1';
+            }, 200);
+        }
+
+        // INDICADOR DE DIGITANDO
+        function showTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            typingIndicator.style.display = 'block';
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            typingIndicator.style.display = 'none';
+        }
+
+        // ATALHOS DE TECLADO
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', function(e) {
+                // Ctrl + L - Limpar chat
+                if (e.ctrlKey && e.key === 'l') {
+                    e.preventDefault();
+                    clearChat();
+                    showShortcutFeedback('💰 Consultas limpas!');
+                }
+                
+                // Ctrl + T - Alternar tema
+                if (e.ctrlKey && e.key === 't') {
+                    e.preventDefault();
+                    toggleTheme();
+                    showShortcutFeedback('🌙 Tema alterado!');
+                }
+                
+                // Ctrl + ? - Mostrar atalhos
+                if (e.ctrlKey && e.key === '/') {
+                    e.preventDefault();
+                    toggleShortcutsTooltip();
+                }
+                
+                // Esc - Fechar tooltip
+                if (e.key === 'Escape') {
+                    hideShortcutsTooltip();
+                }
+            });
+        }
+
+        // TOOLTIP DE ATALHOS
+        function toggleShortcutsTooltip() {
+            const tooltip = document.getElementById('shortcuts-tooltip');
+            tooltip.classList.toggle('show');
+            
+            if (tooltip.classList.contains('show')) {
+                setTimeout(hideShortcutsTooltip, 5000); // Auto-hide após 5s
+            }
+        }
+
+        function hideShortcutsTooltip() {
+            const tooltip = document.getElementById('shortcuts-tooltip');
+            tooltip.classList.remove('show');
+        }
+
+        function showShortcutFeedback(message) {
+            // Cria notificação temporária
+            const feedback = document.createElement('div');
+            feedback.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 10px 20px;
+                border-radius: 25px;
+                font-size: 14px;
+                z-index: 10000;
+                animation: fadeInOut 2s ease-out forwards;
+            `;
+            feedback.textContent = message;
+            
+            // CSS da animação inline
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeInOut {
+                    0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+                    20%, 80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(feedback);
+            
+            setTimeout(() => {
+                feedback.remove();
+                style.remove();
+            }, 2000);
+        }
+
+        // Função para adicionar a mensagem ao chat
+        function appendMessage(sender, text) {
+            const div = document.createElement('div');
+            div.classList.add('message', sender);
+            div.innerHTML = text + `<div class="message-timestamp">${getCurrentTimestamp()}</div>`;
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight; // Rola para baixo
+        }
+
+        // Função principal que envia a requisição para o Flask
+        async function sendMessage() {
+            const messageText = userInput.value.trim();
+            if (messageText === "") return;
+
+            const sendButton = document.getElementById('send-button');
+            const statusIndicator = document.getElementById('status-indicator');
+
+            // 1. Adiciona a mensagem do usuário primeiro
+            appendMessage('user', '<strong>Investidor:</strong> ' + messageText);
+            userInput.value = '';
+
+            // Desabilita o botão durante o envio
+            sendButton.disabled = true;
+            sendButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analisando...';
+            statusIndicator.style.background = 'var(--warning-color)';
+
+            // Mostra indicador de digitando APÓS a mensagem do usuário
+            showTypingIndicator();
+
+            try {
+                // Simula delay mínimo para mostrar animação de digitando
+                await new Promise(resolve => setTimeout(resolve, 800));
+
+                // Requisição assíncrona POST para o servidor Flask
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    // Envia a mensagem do usuário no corpo JSON
+                    body: JSON.stringify({ message: messageText })
+                });
+                
+                // Verifica se a resposta HTTP foi bem-sucedida
+                if (!response.ok) {
+                    throw new Error(`Erro de rede ou servidor: Status ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                // Esconde indicador de digitando
+                hideTypingIndicator();
+                
+                // Exibe a resposta recebida do servidor Flask
+                appendMessage('ai', '<strong>InvestBot:</strong> ' + data.response);
+                statusIndicator.style.background = 'var(--success-color)';
+
+            } catch (error) {
+                console.error('Erro de Comunicação:', error);
+                // Esconde indicador de digitando
+                hideTypingIndicator();
+                // Exibe uma mensagem de erro clara para o usuário
+                appendMessage('error', '<strong>⚠️ Conexão Perdida!</strong> O servidor de investimentos está offline. Verifique se o <strong>app.py</strong> está rodando.<br><small>Detalhe: ' + error.message + '</small>');
+                statusIndicator.style.background = 'var(--danger-color)';
+            } finally {
+                // Reabilita o botão
+                sendButton.disabled = false;
+                sendButton.innerHTML = '<i class="fas fa-paper-plane"></i> Consultar';
+            }
+        }
+
+        // Permite enviar a mensagem pressionando Enter
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // PERGUNTAS RÁPIDAS PARA INVESTIMENTOS
+        function askQuickQuestion(question) {
+            userInput.value = question;
+            sendMessage();
+        }
+    </script>
+</body>
+</html>

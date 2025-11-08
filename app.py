@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS # ler arquivo html
 
 # habilita a função para ler dados
@@ -22,6 +22,7 @@ def get_ai_response(user_message):
 def chat():
     data=request.get_json()
     user_message=data.get('message', '')
+    ai_text = get_ai_response(user_message)
 
     return jsonify({
         'status': 'success',
@@ -30,7 +31,7 @@ def chat():
 
 @app.route('/', methods=['GET'])
 def index():
-    return "O agente de IA está funcionando"
+    return render_template('index.html')
 
 if __name__=='__main__':
     app.run(debug=True)
