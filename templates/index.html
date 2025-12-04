@@ -66,7 +66,7 @@
             border-radius: 20px;
             box-shadow: 0 20px 40px var(--shadow-color);
             width: 100%;
-            max-width: 800px;
+            max-width: 1400px;
             overflow: hidden;
             animation: fadeInUp 0.6s ease-out;
             transition: all 0.3s ease;
@@ -125,10 +125,10 @@
         #chat-box {
             background: var(--chat-bg);
             border-radius: 15px;
-            padding: 15px;
-            height: 400px;
+            padding: 12px;
+            height: 550px;
             overflow-y: auto;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border: 1px solid var(--chat-border);
             scrollbar-width: thin;
             scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
@@ -150,14 +150,14 @@
         }
 
         .message {
-            margin-bottom: 12px;
-            padding: 12px 16px;
+            margin-bottom: 10px;
+            padding: 10px 14px;
             border-radius: 12px;
-            max-width: 75%;
+            max-width: 85%;
             animation: messageSlide 0.3s ease-out;
-            line-height: 1.4;
+            line-height: 1.5;
             position: relative;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         @keyframes messageSlide {
@@ -175,7 +175,7 @@
         .user {
             background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
             color: white;
-            margin-left: 25%;
+            margin-left: 15%;
             border-bottom-right-radius: 5px;
             font-size: 13px;
         }
@@ -184,14 +184,15 @@
             content: '\f2bd';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
-            margin-right: 10px;
+            margin-right: 8px;
+            font-size: 12px;
         }
 
         .ai {
             background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
             color: white;
             border-left: 3px solid #27ae60;
-            margin-right: 25%;
+            margin-right: 15%;
             border-bottom-left-radius: 5px;
             font-size: 13px;
         }
@@ -200,7 +201,32 @@
             content: '\f201';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
-            margin-right: 10px;
+            margin-right: 8px;
+            font-size: 12px;
+        }
+
+        /* Formatação de conteúdo HTML dentro das mensagens */
+        .message strong {
+            font-weight: 700;
+            color: inherit;
+        }
+
+        .message em {
+            font-style: italic;
+        }
+
+        .message br {
+            line-height: 1.6;
+        }
+
+        .message ul,
+        .message ol {
+            margin: 6px 0;
+            padding-left: 20px;
+        }
+
+        .message li {
+            margin: 3px 0;
         }
 
         .error {
@@ -846,15 +872,17 @@
             }
 
             .message {
-                padding: 12px;
+                padding: 10px;
+                max-width: 90%;
+                font-size: 13px;
             }
 
             .user {
-                margin-left: 10%;
+                margin-left: 5%;
             }
 
             .ai {
-                margin-right: 10%;
+                margin-right: 5%;
             }
 
             .input-area {
@@ -1252,10 +1280,33 @@
             }, 2000);
         }
 
+        // Função para converter Markdown básico para HTML
+        function markdownToHtml(text) {
+            // Converte **texto** para <strong>texto</strong>
+            text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+            // Converte *texto* para <em>texto</em>
+            text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+            // Converte quebras de linha duplas para <br><br>
+            text = text.replace(/\n\n/g, '<br><br>');
+
+            // Converte quebras de linha simples para <br>
+            text = text.replace(/\n/g, '<br>');
+
+            return text;
+        }
+
         // Função para adicionar a mensagem ao chat
         function appendMessage(sender, text) {
             const div = document.createElement('div');
             div.classList.add('message', sender);
+
+            // Converte Markdown para HTML se for mensagem da IA
+            if (sender === 'ai') {
+                text = markdownToHtml(text);
+            }
+
             div.innerHTML = text + `<div class="message-timestamp">${getCurrentTimestamp()}</div>`;
             chatBox.appendChild(div);
             chatBox.scrollTop = chatBox.scrollHeight; // Rola para baixo
