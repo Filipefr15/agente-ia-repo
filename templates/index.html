@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,6 +77,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -156,11 +158,14 @@
             line-height: 1.4;
             position: relative;
             font-size: 14px;
-        }        @keyframes messageSlide {
+        }
+
+        @keyframes messageSlide {
             from {
                 opacity: 0;
                 transform: translateX(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -182,7 +187,7 @@
             margin-right: 10px;
         }
 
-                .ai {
+        .ai {
             background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
             color: white;
             border-left: 3px solid #27ae60;
@@ -270,9 +275,19 @@
         }
 
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
         }
 
         .input-area {
@@ -349,9 +364,17 @@
         }
 
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
 
         /* Toggle do Modo Escuro */
@@ -529,12 +552,12 @@
         .fullscreen-mode .header h1 {
             color: white;
             font-size: 2.2em;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             margin-bottom: 8px;
         }
 
         .fullscreen-mode .header .subtitle {
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 1.1em;
             font-weight: 300;
         }
@@ -580,7 +603,8 @@
         }
 
         .fullscreen-mode .quick-questions {
-            display: none; /* Oculta perguntas rápidas em tela cheia */
+            display: none;
+            /* Oculta perguntas rápidas em tela cheia */
         }
 
         @keyframes expandFullscreen {
@@ -588,6 +612,7 @@
                 transform: scale(0.95);
                 opacity: 0;
             }
+
             to {
                 transform: scale(1);
                 opacity: 1;
@@ -632,8 +657,13 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         /* Timestamp nas mensagens */
@@ -674,15 +704,24 @@
             opacity: 0.6;
         }
 
-        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
-        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+        .typing-dots span:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: -0.16s;
+        }
 
         @keyframes typingAnimation {
-            0%, 80%, 100% { 
+
+            0%,
+            80%,
+            100% {
                 transform: scale(0.8);
                 opacity: 0.5;
             }
-            40% { 
+
+            40% {
                 transform: scale(1);
                 opacity: 1;
             }
@@ -704,8 +743,13 @@
         }
 
         @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
         }
 
         /* Tooltip para atalhos */
@@ -836,7 +880,8 @@
                 font-size: 1em;
             }
 
-            .user, .ai {
+            .user,
+            .ai {
                 margin-left: 0;
                 margin-right: 0;
             }
@@ -889,15 +934,18 @@
             }
 
             .theme-toggle span {
-                display: none; /* Oculta o texto em telas muito pequenas */
+                display: none;
+                /* Oculta o texto em telas muito pequenas */
             }
 
             .shortcuts-tooltip {
-                display: none; /* Oculta tooltip em mobile */
+                display: none;
+                /* Oculta tooltip em mobile */
             }
 
             .quick-questions {
-                display: none; /* Oculta perguntas rápidas em mobile */
+                display: none;
+                /* Oculta perguntas rápidas em mobile */
             }
         }
 
@@ -943,6 +991,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -960,11 +1009,12 @@
             <h1><i class="fas fa-chart-line"></i> InvestBot</h1>
             <p>Seu Consultor de Investimentos com IA</p>
         </div>
-        
+
         <div class="chat-container">
             <div id="chat-box">
                 <div class="message ai">
-                    <span style="opacity: 0.7; font-size: 11px;">💡 InvestBot:</span> Olá! Sou seu assistente de investimentos. Como posso ajudar?
+                    <span style="opacity: 0.7; font-size: 11px;">💡 InvestBot:</span> Olá! Sou seu assistente de
+                    investimentos. Como posso ajudar?
                     <div class="message-timestamp" id="initial-timestamp"></div>
                 </div>
                 <div class="typing-indicator message" id="typing-indicator">
@@ -977,9 +1027,10 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="quick-questions">
-                <button class="quick-question-btn" onclick="askQuickQuestion('Como começar a investir com pouco dinheiro?')">
+                <button class="quick-question-btn"
+                    onclick="askQuickQuestion('Como começar a investir com pouco dinheiro?')">
                     <i class="fas fa-seedling"></i> Começar a investir
                 </button>
                 <button class="quick-question-btn" onclick="askQuickQuestion('Qual a diferença entre ações e fundos?')">
@@ -992,7 +1043,7 @@
                     <i class="fas fa-exclamation-triangle"></i> Análise de Risco
                 </button>
             </div>
-            
+
             <div class="input-area">
                 <input type="text" id="user-input" placeholder="Ex: Como investir R$ 10.000? Qual a melhor ação hoje?">
                 <button class="send-button" onclick="sendMessage()" id="send-button">
@@ -1019,15 +1070,15 @@
         // LÓGICA JAVASCRIPT PARA COMUNICAR COM O FLASK
         const chatBox = document.getElementById('chat-box');
         const userInput = document.getElementById('user-input');
-        const API_URL = 'https://bookish-capybara-jj4j6x6rg4whpvx9-5000.app.github.dev/api/chat'; // URL do endpoint Flask
-
+        //const API_URL = 'https://bookish-capybara-jj4j6x6rg4whpvx9-5000.app.github.dev/api/chat'; // URL do endpoint Flask
+        const API_URL = 'http://localhost:5000/api/chat';
         // MODO ESCURO/CLARO
         function initializeTheme() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             const body = document.body;
             const themeIcon = document.getElementById('theme-icon');
             const themeText = document.getElementById('theme-text');
-            
+
             if (savedTheme === 'dark') {
                 body.setAttribute('data-theme', 'dark');
                 themeIcon.className = 'fas fa-sun';
@@ -1044,7 +1095,7 @@
             const themeIcon = document.getElementById('theme-icon');
             const themeText = document.getElementById('theme-text');
             const isDark = body.hasAttribute('data-theme');
-            
+
             if (isDark) {
                 body.removeAttribute('data-theme');
                 themeIcon.className = 'fas fa-moon';
@@ -1059,7 +1110,7 @@
         }
 
         // Inicializa o tema ao carregar a página
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             initializeTheme();
             initializeTimestamps();
             setupKeyboardShortcuts();
@@ -1068,9 +1119,9 @@
         // TIMESTAMPS NAS MENSAGENS
         function getCurrentTimestamp() {
             const now = new Date();
-            return now.toLocaleTimeString('pt-BR', { 
-                hour: '2-digit', 
-                minute: '2-digit' 
+            return now.toLocaleTimeString('pt-BR', {
+                hour: '2-digit',
+                minute: '2-digit'
             });
         }
 
@@ -1078,7 +1129,7 @@
             const timestamp1 = document.getElementById('initial-timestamp');
             const timestamp2 = document.getElementById('initial-timestamp2');
             const currentTime = getCurrentTimestamp();
-            
+
             if (timestamp1) timestamp1.textContent = currentTime;
             if (timestamp2) timestamp2.textContent = currentTime;
         }
@@ -1092,7 +1143,7 @@
                     <div class="message-timestamp">${getCurrentTimestamp()}</div>
                 </div>
             `;
-            
+
             // Efeito visual de limpeza
             chatBox.style.opacity = '0.5';
             setTimeout(() => {
@@ -1114,34 +1165,34 @@
 
         // ATALHOS DE TECLADO
         function setupKeyboardShortcuts() {
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', function (e) {
                 // Ctrl + L - Limpar chat
                 if (e.ctrlKey && e.key === 'l') {
                     e.preventDefault();
                     clearChat();
                     showShortcutFeedback('💰 Consultas limpas!');
                 }
-                
+
                 // Ctrl + T - Alternar tema
                 if (e.ctrlKey && e.key === 't') {
                     e.preventDefault();
                     toggleTheme();
                     showShortcutFeedback('🌙 Tema alterado!');
                 }
-                
+
                 // Ctrl + F - Tela cheia
                 if (e.ctrlKey && e.key === 'f') {
                     e.preventDefault();
                     toggleFullscreen();
                     showShortcutFeedback('🖥️ Modo tela cheia!');
                 }
-                
+
                 // Ctrl + ? - Mostrar atalhos
                 if (e.ctrlKey && e.key === '/') {
                     e.preventDefault();
                     toggleShortcutsTooltip();
                 }
-                
+
                 // Esc - Fechar tooltip ou sair de tela cheia
                 if (e.key === 'Escape') {
                     hideShortcutsTooltip();
@@ -1154,7 +1205,7 @@
         function toggleShortcutsTooltip() {
             const tooltip = document.getElementById('shortcuts-tooltip');
             tooltip.classList.toggle('show');
-            
+
             if (tooltip.classList.contains('show')) {
                 setTimeout(hideShortcutsTooltip, 5000); // Auto-hide após 5s
             }
@@ -1182,7 +1233,7 @@
                 animation: fadeInOut 2s ease-out forwards;
             `;
             feedback.textContent = message;
-            
+
             // CSS da animação inline
             const style = document.createElement('style');
             style.textContent = `
@@ -1194,7 +1245,7 @@
             `;
             document.head.appendChild(style);
             document.body.appendChild(feedback);
-            
+
             setTimeout(() => {
                 feedback.remove();
                 style.remove();
@@ -1243,17 +1294,17 @@
                     // Envia a mensagem do usuário no corpo JSON
                     body: JSON.stringify({ message: messageText })
                 });
-                
+
                 // Verifica se a resposta HTTP foi bem-sucedida
                 if (!response.ok) {
                     throw new Error(`Erro de rede ou servidor: Status ${response.status}`);
                 }
 
                 const data = await response.json();
-                
+
                 // Esconde indicador de digitando
                 hideTypingIndicator();
-                
+
                 // Exibe a resposta recebida do servidor Flask
                 appendMessage('ai', '<span style="opacity: 0.7; font-size: 11px;">💡 InvestBot:</span> ' + data.response);
                 statusIndicator.style.background = 'var(--success-color)';
@@ -1273,7 +1324,7 @@
         }
 
         // Permite enviar a mensagem pressionando Enter
-        userInput.addEventListener('keypress', function(e) {
+        userInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 sendMessage();
             }
@@ -1286,7 +1337,7 @@
 
             // 1. Primeiro mostra a pergunta do usuário
             appendMessage('user', '<span style="opacity: 0.7; font-size: 11px;">Você:</span> ' + question);
-            
+
             // Limpa o input
             userInput.value = '';
 
@@ -1310,16 +1361,16 @@
                     },
                     body: JSON.stringify({ message: question })
                 });
-                
+
                 if (!response.ok) {
                     throw new Error(`Erro de rede ou servidor: Status ${response.status}`);
                 }
 
                 const data = await response.json();
-                
+
                 // Esconde indicador de digitando
                 hideTypingIndicator();
-                
+
                 // 3. Por fim mostra a resposta do bot
                 appendMessage('ai', '<span style="opacity: 0.7; font-size: 11px;">💡 InvestBot:</span> ' + data.response);
                 statusIndicator.style.background = 'var(--success-color)';
@@ -1343,7 +1394,7 @@
             const container = document.querySelector('.container');
             const overlay = document.getElementById('fullscreen-overlay');
             const fullscreenIcon = document.getElementById('fullscreen-icon');
-            
+
             if (!isFullscreen) {
                 // Entrar em tela cheia
                 container.classList.add('fullscreen-mode');
@@ -1352,11 +1403,11 @@
                 fullscreenIcon.className = 'fas fa-compress';
                 document.body.style.overflow = 'hidden';
                 isFullscreen = true;
-                
+
                 // Scroll para o topo do chat
                 const chatBox = document.getElementById('chat-box');
                 chatBox.scrollTop = chatBox.scrollHeight;
-                
+
             } else {
                 // Sair da tela cheia
                 exitFullscreen();
@@ -1368,7 +1419,7 @@
                 const container = document.querySelector('.container');
                 const overlay = document.getElementById('fullscreen-overlay');
                 const fullscreenIcon = document.getElementById('fullscreen-icon');
-                
+
                 container.classList.remove('fullscreen-mode');
                 document.body.classList.remove('fullscreen-active');
                 overlay.classList.remove('show');
@@ -1379,9 +1430,9 @@
         }
 
         // Impedir propagação do clique no container quando em tela cheia
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const container = document.querySelector('.container');
-            container.addEventListener('click', function(e) {
+            container.addEventListener('click', function (e) {
                 if (isFullscreen) {
                     e.stopPropagation();
                 }
@@ -1389,4 +1440,5 @@
         });
     </script>
 </body>
+
 </html>
